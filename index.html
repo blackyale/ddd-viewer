@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDD-Viewer Simple Example</title>
+
+    <!-- We used Tailwind CSS library for presentation, but it`s not necessary for the viewer. -->
+    <!-- <link rel="stylesheet" href="https://3dsmaps.com/static/libs/tailwindcss/2.2.0-canary.16/tailwind.min.css">  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.0-canary.16/tailwind.min.css">
+
+    <!-- Importing DDD-Viewer library -->
+    <!-- <script src="https://preview.babylonjs.com/babylon.js"></script> -->
+    <!-- <script src="../../dist/ddd-viewer.umd.development.js"></script> -->
+    <script src="lib/ddd-viewer.umd.production.min.js"></script>
+</head>
+
+<body class="text-6xl font-sans text-center text-gray-500">
+
+    <div class="flex justify-center items-center w-full h-screen flex-wrap">
+        <h1 class="w-full">Simple Example DDD-Viewer</h1>
+        <canvas id="ddd-scene" style="width: 500px; height: 400px;"></canvas>
+    </div>
+
+    <script>
+
+        function initViewer() {
+
+            var dddviewer = window['ddd-viewer'];
+
+            const dddConfig = {
+                "defaultCoords": [-8.723, 42.238],
+                //"defaultCoords": [-8.4069793, 43.3861094],
+                "tileUrlBase": "https://3dsmaps.com/cache/ddd_http/",
+                "assetsUrlbase": "https://3dsmaps.com/assets/",
+                "materialsTextureSet": "default256",
+                "geolocation": false
+            }
+
+            const canvas = document.getElementById('ddd-scene');
+            const sceneViewer = new dddviewer.SceneViewer(canvas, dddConfig);
+
+            const layerDddOsm3d = new dddviewer.GeoTile3DLayer();
+            sceneViewer.layerManager.addLayer(layerDddOsm3d);
+
+            // Events
+            //window.addEventListener('resize', this.resize);
+
+        }
+
+        window.addEventListener("load", () => {
+            initViewer();
+        });
+
+    </script>
+</body>
+
+</html>
